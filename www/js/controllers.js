@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('ChatsCtrl', function($scope) {
   $scope.chats = [{
     id: 0,
     name: 'GA HK WDI 8',
@@ -10,7 +10,7 @@ angular.module('starter.controllers', [])
   }]
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, $firebaseObject) {
   console.log($stateParams.chatId);
 })
 
