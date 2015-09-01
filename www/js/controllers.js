@@ -10,8 +10,18 @@ angular.module('starter.controllers', [])
   }]
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, $firebaseObject) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, $firebaseArray) {
   console.log($stateParams.chatId);
+
+  var ref = new Firebase("https://glowing-fire-2513.firebaseio.com/messages");
+
+  $scope.messages = $firebaseArray(ref);
+
+  $scope.addMessage = function() {
+    $scope.messages.$add({
+      text: $scope.newMessage
+    });
+  };
 })
 
 .controller('AccountCtrl', function($scope) {
