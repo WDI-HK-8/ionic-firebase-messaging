@@ -10,8 +10,8 @@ angular.module('starter.controllers', [])
   }]
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, $firebaseArray, $ionicScrollDelegate) {
-  console.log($stateParams.chatId);
+.controller('ChatDetailCtrl', function($scope, $stateParams, $firebaseArray, $ionicScrollDelegate, $window) {
+  var user = $window.localStorage.getItem('currentName')
 
   var ref = new Firebase("https://glowing-fire-2513.firebaseio.com/messages");
 
@@ -19,7 +19,8 @@ angular.module('starter.controllers', [])
 
   $scope.addMessage = function() {
     $scope.messages.$add({
-      text: $scope.newMessage
+      text: $scope.newMessage,
+      user: user ? user : "Anonymous"
     });
 
     $scope.newMessage = "";
@@ -30,8 +31,16 @@ angular.module('starter.controllers', [])
   }, true);
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
+.controller('AccountCtrl', function($scope, $window, $ionicPopup) {
+  $scope.form = {};  
+  $scope.form.currentName = $window.localStorage.getItem('currentName');
+
+  $scope.form.setCurrentName = function() {
+    $window.localStorage.setItem('currentName', $scope.form.currentName);
+
+    $ionicPopup.alert({
+     title: 'Name is set',
+     template: $scope.form.currentName
+   });
   };
 });
