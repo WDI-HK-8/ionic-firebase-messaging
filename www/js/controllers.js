@@ -10,7 +10,7 @@ angular.module('starter.controllers', [])
   }]
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, $firebaseArray) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, $firebaseArray, $ionicScrollDelegate) {
   console.log($stateParams.chatId);
 
   var ref = new Firebase("https://glowing-fire-2513.firebaseio.com/messages");
@@ -21,7 +21,13 @@ angular.module('starter.controllers', [])
     $scope.messages.$add({
       text: $scope.newMessage
     });
+
+    $scope.newMessage = "";
   };
+
+  $scope.$watch('messages', function() { 
+    $ionicScrollDelegate.scrollBottom();
+  }, true);
 })
 
 .controller('AccountCtrl', function($scope) {

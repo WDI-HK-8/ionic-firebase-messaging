@@ -14,13 +14,13 @@
 
 <ion-footer-bar>
 
-    <div class="item item-input-inset">
+  <form class="item item-input-inset" ng-submit="addMessage()">
     <label class="item-input-wrapper">
       <input type="text" placeholder="type here..." ng-model="newMessage">
     </label>
-    <button class="button button-small" ng-click="addMessage()">
+    <button class="button button-small">
       Send
     </button>
-  </div>
+  </form>
 
 </ion-footer-bar>
